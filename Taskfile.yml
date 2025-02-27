@@ -1,0 +1,21 @@
+# https://taskfile.dev
+
+version: "3"
+
+vars:
+  ONNX_URL: https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx
+  BIN_URL: https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin
+
+tasks:
+  default:
+    desc: default list
+    cmds:
+      - task --list-all
+    silent: true
+  download-model:
+    desc: download TTS model
+    cmds:
+      - wget -N "{{.ONNX_URL}}"
+      - wget -N "{{.BIN_URL}}"
+    env:
+      DOWNLOADER: aria2c
