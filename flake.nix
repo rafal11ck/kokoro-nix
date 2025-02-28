@@ -1,5 +1,5 @@
 {
-  description = "A Nix-flake-based Python development environment";
+  description = "I just want good TTS";
 
   inputs.nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
 
@@ -37,11 +37,14 @@
               ++ (with pkgs.python312Packages; [
                 mpv
                 numpy
+                sounddevice
+                soundfile
               ]);
-            shellhook = ''
-              uv init -p 3.12
-              uv add kokoro-onnx soundfile
-              taskdownload-model
+            shellHook = ''
+              uv init -p 3.12;
+              uv add kokoro-onnx;
+              task download-model;
+              printf 'RUN: export RENPY_TTS_COMMAND="$(realpath ./kokoro-read.sh)"'
             '';
           };
         }

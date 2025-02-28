@@ -15,7 +15,7 @@ tasks:
   download-model:
     desc: download TTS model
     cmds:
-      - wget -N "{{.ONNX_URL}}"
-      - wget -N "{{.BIN_URL}}"
+      - wget -N --no-verbose "{{.ONNX_URL}}"
+      - wget -N --no-verbose "{{.BIN_URL}}"
     env:
       DOWNLOADER: aria2c
